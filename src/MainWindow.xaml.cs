@@ -20,7 +20,7 @@ namespace CanaryLauncherUpdate
 {
 	public partial class MainWindow : Window
 	{
-		static string launcerConfigUrl = "https://raw.githubusercontent.com/opentibiabr/canary-launcher/main/launcher_config.json";
+		static string launcerConfigUrl = "https://raw.githubusercontent.com/TibiAU/mista-launcher/main/launcher_config.json";
 		// Load informations of launcher_config.json file
 		static ClientConfig clientConfig = ClientConfig.loadFromFile(launcerConfigUrl);
 
@@ -144,17 +144,13 @@ namespace CanaryLauncherUpdate
 
 		private void UpdateClient()
 		{
-			if (!Directory.Exists(GetLauncherPath(true)))
-			{
-				Directory.CreateDirectory(GetLauncherPath());
-			}
 			labelDownloadPercent.Visibility = Visibility.Visible;
 			progressbarDownload.Visibility = Visibility.Visible;
 			labelClientVersion.Visibility = Visibility.Collapsed;
 			buttonPlay.Visibility = Visibility.Collapsed;
 			webClient.DownloadProgressChanged += Client_DownloadProgressChanged;
 			webClient.DownloadFileCompleted += Client_DownloadFileCompleted;
-			webClient.DownloadFileAsync(new Uri(urlClient), GetLauncherPath() + "/tibia.zip");
+			webClient.DownloadFileAsync(new Uri(urlClient), GetLauncherPath(true) + "/mista.zip");
 		}
 
 		private void buttonPlay_Click(object sender, RoutedEventArgs e)
@@ -172,10 +168,10 @@ namespace CanaryLauncherUpdate
 			}
 			else
 			{
-				if (clientDownloaded == true || !Directory.Exists(GetLauncherPath(true)))
+				if (clientDownloaded == true || !Directory.Exists(GetLauncherPath()))
 				{
 					Process.Start(GetLauncherPath() + "/bin/" + clientExecutableName);
-					this.Close();
+                    this.Close();
 				}
 				else
 				{
@@ -197,7 +193,7 @@ namespace CanaryLauncherUpdate
 			{
 				foreach (ZipEntry zipEntry in modZip)
 				{
-					zipEntry.Extract(GetLauncherPath(), existingFileAction);
+					zipEntry.Extract(GetLauncherPath(true), existingFileAction);
 				}
 			}
 		}
@@ -222,9 +218,8 @@ namespace CanaryLauncherUpdate
 			// Adds the task to a secondary task to prevent the program from crashing while this is running
 			await Task.Run(() =>
 			{
-				Directory.CreateDirectory(GetLauncherPath());
-				ExtractZip(GetLauncherPath() + "/tibia.zip", ExtractExistingFileAction.OverwriteSilently);
-				File.Delete(GetLauncherPath() + "/tibia.zip");
+				ExtractZip(GetLauncherPath(true) + "/mista.zip", ExtractExistingFileAction.OverwriteSilently);
+				File.Delete(GetLauncherPath(true) + "/mista.zip");
 			});
 			progressbarDownload.Value = 100;
 

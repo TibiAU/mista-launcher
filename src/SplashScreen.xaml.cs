@@ -18,7 +18,7 @@ namespace CanaryLauncherUpdate
 {
 	public partial class SplashScreen : Window
 	{
-		static string launcerConfigUrl = "https://raw.githubusercontent.com/opentibiabr/canary-launcher/main/launcher_config.json";
+		static string launcerConfigUrl = "https://raw.githubusercontent.com/TibiAU/mista-launcher/main/launcher_config.json";
 		// Load informations of launcher_config.json file
 		static ClientConfig clientConfig = ClientConfig.loadFromFile(launcerConfigUrl);
 
@@ -93,10 +93,6 @@ namespace CanaryLauncherUpdate
 				this.Close();
 			}
 
-			if (!Directory.Exists(GetLauncherPath()))
-			{
-				Directory.CreateDirectory(GetLauncherPath());
-			}
 			MainWindow mainWindow = new MainWindow();
 			this.Close();
 			mainWindow.Show();
