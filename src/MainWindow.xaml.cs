@@ -218,7 +218,7 @@ namespace CanaryLauncherUpdate
 			// Adds the task to a secondary task to prevent the program from crashing while this is running
 			await Task.Run(() =>
 			{
-				ExtractZip(GetLauncherPath(true) + "/mista.zip", ExtractExistingFileAction.OverwriteSilently);
+				ExtractZip(GetLauncherPath(true) + "/mista.zip", ExtractExistingFileAction.DoNotOverwrite);
 				File.Delete(GetLauncherPath(true) + "/mista.zip");
 			});
 			progressbarDownload.Value = 100;
