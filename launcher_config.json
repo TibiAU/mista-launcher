@@ -24,6 +24,6 @@ NOTE: Set it to "false" or only "" to not use the client folder, so everything w
 		}
 	],
 	"clientFolder": "mista-client-main",
-	"newClientUrl" : "http://mista-reborn.com/client.zip",
+	"newClientUrl" : "https://mista-reborn.com/client.zip",
 	"clientExecutable": "client.exe"
 }
